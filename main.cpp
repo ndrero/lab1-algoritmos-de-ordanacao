@@ -50,7 +50,7 @@ int main(){
         cout << "[7] Ordenar utilizando Heap Sort" << endl;
         cout << "[8] Executar e comparar todos os algoritmos" << endl;
         cout << "[9] Sair" << endl;
-        cout << "Escolha uma opcao: ";
+        cout << "Escolha uma opcao: " << endl;
         cin >> option;
 
         switch (option)
@@ -87,10 +87,12 @@ int main(){
             break;
         case 2:
             if (mainArray == nullptr) {
-                cout << "Nenhum vetor definido";
+                cout << "Nenhum vetor definido" << endl;
                 break;
             } 
+            cout << "== Conteúdo do vetor ==" << endl;
             showNumbers(mainArray, n);
+            cout << "==========================" << endl;
             break;
         case 3:
             /* code */
@@ -111,7 +113,7 @@ int main(){
             /* code */
             break;
         case 9:
-            cout << "Encerrando programa...";
+            cout << "Encerrando programa..." << endl;
             break;
         
         default:
