@@ -5,9 +5,12 @@
 using namespace std;
 
 void showNumbers(int *A, int n){
+    cout << "== Conteúdo do vetor ==" << endl;
     for(int i = 0; i < n; i++){
         cout << A[i] << endl;
-    }
+    };
+    cout << "==========================" << endl;
+
 }
 
 void generateRandomNumbers(int *Array, int n){;
@@ -90,9 +93,7 @@ int main(){
                 cout << "Nenhum vetor definido" << endl;
                 break;
             } 
-            cout << "== Conteúdo do vetor ==" << endl;
             showNumbers(mainArray, n);
-            cout << "==========================" << endl;
             break;
         case 3:
             /* code */
