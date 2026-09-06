@@ -72,7 +72,7 @@ int main(){
                 generateRandomNumbers(mainArray, n);
                 break;
             case 2:
-                generateRandomNumbers(mainArray, n);
+                generateOrderedNumbers(mainArray, n);
                 break;
             case 3:
                 generateInverseOrderedNumbers(mainArray, n);
