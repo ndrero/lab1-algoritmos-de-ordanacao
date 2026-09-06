@@ -42,6 +42,22 @@ int* createCopy(int *A, int n){
     return newArray;
 };
 
+void selectionSort(int *A, int n){
+    int i, j, Min;
+    int temp;
+    for(i = 0; i < n - 1; i++){
+        Min = i;
+        for(j = i + 1; j < n; j++){
+            if(A[j] < A[Min]){
+                 Min = j;
+            };
+        }
+        temp = A[Min];
+        A[Min] = A[i];
+        A[i] = temp;
+    }
+};
+
 int main(){
     int option;
     int n = 0;
@@ -101,9 +117,18 @@ int main(){
             } 
             showNumbers(mainArray, n);
             break;
-        case 3:
-            /* code */
+        case 3: {
+            if (mainArray == nullptr) {
+                cout << "Nenhum vetor definido" << endl;
+                break;
+            } 
+            int* arrayCopy = createCopy(mainArray, n);
+            selectionSort(arrayCopy, n);
+            cout << "=== Ordenação por Seleção ===" << endl;
+            showNumbers(arrayCopy, n);
+            delete[] arrayCopy;
             break;
+        }
         case 4:
             /* code */
             break;
