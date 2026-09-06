@@ -35,6 +35,12 @@ void generateMixedOrder(int *Array, int n){
         Array[i] = rand() % 100;
 };
 
+int* createCopy(int *A, int n){
+    int *newArray = new int[n];
+    for(int i = 0; i < n; i++)
+        newArray[i] = A[i];
+    return newArray;
+};
 
 int main(){
     int option;
