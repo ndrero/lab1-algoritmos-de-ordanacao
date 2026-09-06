@@ -43,19 +43,26 @@ int* createCopy(int *A, int n){
 };
 
 void selectionSort(int *A, int n){
+    int comparacoes = 0, movimentacoes = 0;
     int i, j, Min;
     int temp;
     for(i = 0; i < n - 1; i++){
         Min = i;
         for(j = i + 1; j < n; j++){
+            comparacoes++;
             if(A[j] < A[Min]){
                  Min = j;
             };
         }
-        temp = A[Min];
-        A[Min] = A[i];
-        A[i] = temp;
+        if (Min != i){
+            temp = A[Min];
+            A[Min] = A[i];
+            A[i] = temp;
+            movimentacoes += 3;
+        }
     }
+    cout << "| Comparações : " << comparacoes << " |" << endl;
+    cout << "| Movimentações : " << movimentacoes << " |" << endl;
 };
 
 int main(){
