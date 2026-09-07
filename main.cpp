@@ -46,6 +46,9 @@ void selectionSort(int *A, int n){
     int comparacoes = 0, movimentacoes = 0;
     int i, j, Min;
     int temp;
+
+    auto inicio = chrono::high_resolution_clock::now();
+
     for(i = 0; i < n - 1; i++){
         Min = i;
         for(j = i + 1; j < n; j++){
@@ -61,6 +64,9 @@ void selectionSort(int *A, int n){
             movimentacoes += 3;
         }
     }
+    auto fim = chrono::high_resolution_clock::now();
+
+    cout << "| Tempo: " << chrono::duration<double, milli>(fim - inicio).count() << endl;
     cout << "| Comparações : " << comparacoes << " |" << endl;
     cout << "| Movimentações : " << movimentacoes << " |" << endl;
 };
