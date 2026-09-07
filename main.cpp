@@ -2,6 +2,12 @@
 #include <string>
 #include <chrono>
 
+struct Estatistica {
+    long long comparacoes;
+    long long movimentacoes;
+    double tempo;
+};
+
 using namespace std;
 
 void showNumbers(int *A, int n){
@@ -42,7 +48,7 @@ int* createCopy(int *A, int n){
     return newArray;
 };
 
-void selectionSort(int *A, int n){
+Estatistica selectionSort(int *A, int n){
     int comparacoes = 0, movimentacoes = 0;
     int i, j, Min;
     int temp;
@@ -66,10 +72,20 @@ void selectionSort(int *A, int n){
     }
     auto fim = chrono::high_resolution_clock::now();
 
-    cout << "| Tempo: " << chrono::duration<double, milli>(fim - inicio).count() << endl;
-    cout << "| Comparações : " << comparacoes << " |" << endl;
-    cout << "| Movimentações : " << movimentacoes << " |" << endl;
+    Estatistica E;
+    E.comparacoes = comparacoes;
+    E.movimentacoes = movimentacoes;
+    E.tempo = chrono::duration<double, milli>(fim - inicio).count();
+
+    return E;
 };
+
+void exibirEstatisticas(string nome, Estatistica E){
+     cout << nome << endl
+         << "Comparações: "   << E.comparacoes   << endl
+         << "Movimentações: " << E.movimentacoes << endl
+         << "Tempo: "         << E.tempo << " ms" << endl;
+}
 
 int main(){
     int option;
@@ -136,8 +152,9 @@ int main(){
                 break;
             } 
             int* arrayCopy = createCopy(mainArray, n);
-            selectionSort(arrayCopy, n);
-            cout << "=== Ordenação por Seleção ===" << endl;
+            Estatistica resultados = selectionSort(arrayCopy, n);
+            // cout << "=== Ordenação por Seleção ===" << endl;
+            exibirEstatisticas("=== Ordenação por Seleção ===", resultados);
             showNumbers(arrayCopy, n);
             delete[] arrayCopy;
             break;
