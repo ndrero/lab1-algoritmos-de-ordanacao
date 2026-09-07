@@ -2,6 +2,12 @@
 #include <string>
 #include <chrono>
 
+struct Estatistica {
+    long long comparacoes;
+    long long movimentacoes;
+    double tempo;
+};
+
 using namespace std;
 
 void showNumbers(int *A, int n){
@@ -41,6 +47,45 @@ int* createCopy(int *A, int n){
         newArray[i] = A[i];
     return newArray;
 };
+
+Estatistica selectionSort(int *A, int n){
+    int comparacoes = 0, movimentacoes = 0;
+    int i, j, Min;
+    int temp;
+
+    auto inicio = chrono::high_resolution_clock::now();
+
+    for(i = 0; i < n - 1; i++){
+        Min = i;
+        for(j = i + 1; j < n; j++){
+            comparacoes++;
+            if(A[j] < A[Min]){
+                 Min = j;
+            };
+        }
+        if (Min != i){
+            temp = A[Min];
+            A[Min] = A[i];
+            A[i] = temp;
+            movimentacoes += 3;
+        }
+    }
+    auto fim = chrono::high_resolution_clock::now();
+
+    Estatistica E;
+    E.comparacoes = comparacoes;
+    E.movimentacoes = movimentacoes;
+    E.tempo = chrono::duration<double, milli>(fim - inicio).count();
+
+    return E;
+};
+
+void exibirEstatisticas(string nome, Estatistica E){
+     cout << nome << endl
+         << "Comparações: "   << E.comparacoes   << endl
+         << "Movimentações: " << E.movimentacoes << endl
+         << "Tempo: "         << E.tempo << " ms" << endl;
+}
 
 int main(){
     int option;
@@ -101,9 +146,19 @@ int main(){
             } 
             showNumbers(mainArray, n);
             break;
-        case 3:
-            /* code */
+        case 3: {
+            if (mainArray == nullptr) {
+                cout << "Nenhum vetor definido" << endl;
+                break;
+            } 
+            int* arrayCopy = createCopy(mainArray, n);
+            Estatistica resultados = selectionSort(arrayCopy, n);
+            // cout << "=== Ordenação por Seleção ===" << endl;
+            exibirEstatisticas("=== Ordenação por Seleção ===", resultados);
+            showNumbers(arrayCopy, n);
+            delete[] arrayCopy;
             break;
+        }
         case 4:
             /* code */
             break;
